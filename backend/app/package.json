@@ -4,7 +4,7 @@
   "description": "backend salon automobile",
   "main": "server.js",
   "scripts": {
-    "test": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "keywords": [
     "node",
@@ -15,11 +15,14 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "fawn": "^2.1.5",
     "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
-    "mongoose-unique-validation": "^0.1.0"
+    "mongoose-unique-validator": "^2.0.3",
+    "multer": "^1.4.2"
   },
   "devDependencies": {
     "dotenv": "^8.2.0"

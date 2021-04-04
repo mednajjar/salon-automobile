@@ -1,0 +1,39 @@
+POST http://localhost:4600/api/registerOwner
+Content-Type: application/json
+
+{
+
+    "first_name": "volvo1",
+    "last_name": "gol",
+    "cin": "ha134567",
+    "email": "volvo1@gmail.com",
+    "rib": "123456789009876543211234",
+    "phone": "0601181312",
+    "password": "azerty"
+}
+###
+POST http://localhost:4600/api/registerClient
+Content-Type: application/json
+
+{
+
+    "first_name": "joker6",
+    "last_name": "gol",
+    "cin": "ha134567",
+    "email": "joker6@gmail.com",
+    "phone": "0601181312",
+    "password": "azerty"
+   
+}
+###
+GET http://localhost:4600/api/login
+Content-Type: application/json
+
+{
+
+    "email": "volvo1@gmail.com",
+    "password": "azerty"
+   
+}
+###
+GET http://localhost:4600/api/logout
