@@ -1,0 +1,27 @@
+{
+  "name": "salon-automobile",
+  "version": "1.0.0",
+  "description": "projet salon d'automobile",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mednajjar/salon-automobile.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "react",
+    "js",
+    "express",
+    "redux"
+  ],
+  "author": "Med-Najjar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mednajjar/salon-automobile/issues"
+  },
+  "homepage": "https://github.com/mednajjar/salon-automobile#readme"
+}
