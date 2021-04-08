@@ -3,13 +3,13 @@ Content-Type: application/json
 
 {
 
-    "first_name": "volvo1",
+    "first_name": "test",
     "last_name": "gol",
     "cin": "ha134567",
-    "email": "volvo1@gmail.com",
+    "email": "owner@gmail.com",
     "rib": "123456789009876543211234",
     "phone": "0601181312",
-    "password": "azerty"
+    "password": "123ABC"
 }
 ###
 POST http://localhost:4600/api/registerClient
@@ -17,10 +17,10 @@ Content-Type: application/json
 
 {
 
-    "first_name": "joker6",
+    "first_name": "test",
     "last_name": "gol",
     "cin": "ha134567",
-    "email": "joker6@gmail.com",
+    "email": "good@gmail.com",
     "phone": "0601181312",
     "password": "azerty"
    
@@ -31,9 +31,36 @@ Content-Type: application/json
 
 {
 
-    "email": "volvo1@gmail.com",
+    "email": "owner@gmail.com",
     "password": "azerty"
    
 }
 ###
+GET http://localhost:4600/api/login
+Content-Type: application/json
+
+{
+
+    "email": "owner@gmail.com",
+    "password": "123ABC"
+   
+}
+###
+POST http://localhost:4600/api/addcar
+Content-Type: application/json
+
+{
+    "registration_number": "6564365",
+    "name": "skoda2",
+    "image": "myphoto1.png",
+    "mark": "2019",
+    "color": "red",
+    "price": "654564",
+    "fuel": "essence"
+}
+
+###
 GET http://localhost:4600/api/logout
+###
+GET http://localhost:4600/api/cars
+auth_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmRjMzQyY2M5ZDRkNWNiODdiMDg0MiIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE2MTc4MTA3MjEsImV4cCI6MTYxNzgxMTMyMX0.xUWKRFjN3j0GKw5I2aJ1AOBzb34nUvF82EtBoMY9P54

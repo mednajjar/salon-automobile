@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const Auth = require('../models/authentication');
+const Owner = require('../models/Owner');
+const Client = require('../models/Client');
 
 exports.authOwner = (req, res, next) => {
     res.type = "owner";
@@ -12,18 +13,27 @@ exports.authClient = (req, res, next) => {
 
 
 
+
 exports.auth = async (req, res, next) => {
     const token = req.cookies['auth_token'];
     console.log(token)
     try{
       const verify = await jwt.verify(token, process.env.TOKEN_SECRET);
       const userLog = verify; 
-      console.log(userLog.role)
-    if(verify && userLog.role == res.type){
-        const auth = await Auth.findById(userLog.id).select('-password');
-        res.locals.auth = auth;
-        console.log(res.locals.auth)
-        next();
+      console.log(userLog)
+    if(verify &&userLog.role == res.type){
+        if(res.type === 'owner'){
+            let auth = await Owner.findById(userLog.id).select('-password');
+            res.locals.auth = auth;
+            console.log(res.locals.auth)
+            next();
+        }else{
+            auth = await Client.findById(userLog.id).select('-password');
+            res.locals.auth = auth;
+            console.log(res.locals.auth)
+            next();
+
+        }
     }
     else{
         res.status(400).json(`1 private root need ${res.type} to login`);

@@ -33,3 +33,16 @@ exports.loginValidation = data=>{
 })
     return schema.validate(data)
 }
+
+exports.addCar = data=>{
+
+    const schema = Joi.object({
+    registration_number: Joi.string().required(),
+    name: Joi.string().required(),
+    mark: Joi.string().required(),
+    color: Joi.string().required(),
+    price:Joi.number().required(),
+    fuel:Joi.string().required()
+})
+    return schema.validate(data)
+}

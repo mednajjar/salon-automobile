@@ -9,8 +9,8 @@ const carSchema = new Schema({
     color: {type: String, required: true},
     price: {type: Number, required: true},
     fuel: {type: String, required: true},
-    is_saled: {type: Boolean, required: true, default: false},
-    id_owner: {type: Schema.Types.ObjectId, ref: 'Owner'}
+    is_saled: {type: Boolean, default: false},
+    id_owner: {type: String}
 })
 
 module.exports = model('Car', carSchema);
