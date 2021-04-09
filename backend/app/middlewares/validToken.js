@@ -11,9 +11,6 @@ exports.authClient = (req, res, next) => {
     next();
 }
 
-
-
-
 exports.auth = async (req, res, next) => {
     const token = req.cookies['auth_token'];
     console.log(token)
@@ -21,7 +18,7 @@ exports.auth = async (req, res, next) => {
       const verify = await jwt.verify(token, process.env.TOKEN_SECRET);
       const userLog = verify; 
       console.log(userLog)
-    if(verify &&userLog.role == res.type){
+    if(verify && userLog.role == res.type){
         if(res.type === 'owner'){
             let auth = await Owner.findById(userLog.id).select('-password');
             res.locals.auth = auth;

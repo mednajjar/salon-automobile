@@ -12,6 +12,13 @@ export const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(4),
     },
     cardGrid: {
+      padding: theme.spacing(1),
+      paddingBottom: theme.spacing(8),
+    },
+    cardGrid2: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
       paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(8),
     },
@@ -31,7 +38,8 @@ export const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(6),
     },
     img: {
-        height: '200px',
+      width: '100%',
+        height: 'auto',
     },
     btn: {
         justifyContent: 'center',
@@ -42,7 +50,17 @@ export const useStyles = makeStyles((theme) => ({
     },
     btnView:{
       border: 'none',
-      
-    }
+
+    },
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
 
   }));

@@ -1,13 +1,9 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import {fetchCars} from '../../actions/OwnerAction';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
+import {Container, Grid, CardContent, Typography, CardActions, Button, Card} from '@material-ui/core';
+
+
 import {useStyles} from './styles'
 
 const Cards = () => {
@@ -21,7 +17,7 @@ const Cards = () => {
       },[dispatch])
 
     return (
-
+      
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
             {car.map((data) => (
@@ -38,12 +34,9 @@ const Cards = () => {
                     </Typography>
                   </CardContent>
                   <CardActions className={classes.btn}>
-                    <Button href={`/view/${data._id}`} variant="contained" size="small" color="primary">
+                    <Button href={`/${data._id}`} variant="contained" size="small" color="primary">
                       View
                     </Button>
-                    {/* <Button variant="contained" size="small" color="primary">
-                      Try
-                    </Button> */}
                   </CardActions>
                 </Card>
               </Grid>
