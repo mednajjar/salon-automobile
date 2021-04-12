@@ -22,12 +22,13 @@ exports.auth = async (req, res, next) => {
         if(res.type === 'owner'){
             let auth = await Owner.findById(userLog.id).select('-password');
             res.locals.auth = auth;
-            console.log(res.locals.auth)
+            console.log(res.locals.auth._id);
             next();
         }else{
             auth = await Client.findById(userLog.id).select('-password');
             res.locals.auth = auth;
-            console.log(res.locals.auth)
+            console.log(res.locals.auth);
+            console.log(res.locals.auth._id);
             next();
 
         }

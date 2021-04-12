@@ -19,8 +19,9 @@ exports.login = async (req, res)=>{
         const match = await bcrypt.compare(password, Email.password);
         if(!match) return res.status(400).json({err: 'Invalid email or password'});
         const token = jwt.sign({id: Email._id, role: Email.role}, process.env.TOKEN_SECRET, {expiresIn:process.env.EXPIRATION_IN});
-        res.cookie('auth_token', token, {maxAge:process.env.EXPIRATION_IN,httpOnly: true});
-        return res.status(200).json({token});
+        console.log(token)
+        return res.status(200).cookie('auth_token', token, {maxAge:process.env.EXPIRATION_IN, httpOnly: true}).json(token);
+
     } catch (err) {
         res.status(500).json({error: 'bad request'});
     }

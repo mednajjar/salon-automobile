@@ -12,7 +12,7 @@ Content-Type: application/json
     "password": "123ABC"
 }
 ###
-POST http://localhost:4600/api/registerClient
+POST http://localhost:4600/api/registerclient
 Content-Type: application/json
 
 {
@@ -20,29 +20,19 @@ Content-Type: application/json
     "first_name": "test",
     "last_name": "gol",
     "cin": "ha134567",
-    "email": "good@gmail.com",
+    "email": "najjedd@gmail.com",
     "phone": "0601181312",
     "password": "azerty"
    
 }
 ###
-GET http://localhost:4600/api/login
+POST http://localhost:4600/api/login/login
 Content-Type: application/json
 
 {
 
-    "email": "owner@gmail.com",
+    "email": "edd@gmail.com",
     "password": "azerty"
-   
-}
-###
-GET http://localhost:4600/api/login
-Content-Type: application/json
-
-{
-
-    "email": "owner@gmail.com",
-    "password": "123ABC"
    
 }
 ###
@@ -52,15 +42,24 @@ Content-Type: application/json
 {
     "registration_number": "6564365",
     "name": "skoda2",
-    "image": "myphoto1.png",
+    "image": "myphoto8.png",
     "mark": "2019",
     "color": "red",
     "price": "654564",
+    "place": 1,
     "fuel": "essence"
 }
 
 ###
-GET http://localhost:4600/api/logout
+GET http://localhost:4600/api/logout/logout
 ###
 GET http://localhost:4600/api/cars
-auth_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmRjMzQyY2M5ZDRkNWNiODdiMDg0MiIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE2MTc4MTA3MjEsImV4cCI6MTYxNzgxMTMyMX0.xUWKRFjN3j0GKw5I2aJ1AOBzb34nUvF82EtBoMY9P54
+auth_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzMyNzNhNGE5ZjExNjY3YzJlZWMzMyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE2MTgxNzUyODMsImV4cCI6MTYxODE3NTg4M30.ZpRr7uALwaW8RI2OAIWXJbynxKwsHwysQZfotO5eWE8
+###
+GET http://localhost:4600/api/606f16f32756ed2cd8429f04
+###
+POST http://localhost:4600/api/try/606d96fe0161a12bccdc3070
+###
+POST http://localhost:4600/api/buy/606f16f32756ed2cd8429f04
+###
+POST http://localhost:4600/api/places

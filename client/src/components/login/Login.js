@@ -1,93 +1,130 @@
-import React from 'react'
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
+import {Avatar, Button, CssBaseline, Paper, Grid, Typography, Container} from '@material-ui/core';
+import AntSwitch from '@material-ui/core/Switch'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import useStyles from './styles'
+import useStyles from './styles';
+import {useHistory} from 'react-router-dom';
+import Input from './input/Input';
+import {Link} from 'react-router-dom';
+import {registerClient} from '../../actions/ClientAction';
+import {registerOwner} from '../../actions/OwnerAction';
+import {loginPage} from '../../actions/auth'
 
 
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="">
-          Tomorrow Cars
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+const initialState = { first_name: '', last_name: '',cin:'', email: '',phone:'', password: ''};
+const ownerState = { first_name: '', last_name: '',cin:'', email: '',phone:'',rib:'', password: ''};
+const loginForm = {email: '',password: ''}
 const Login = () => {
-    const classes = useStyles();
+    const [form, setForm] = useState(initialState);
+    const[owner, setOwner]= useState(ownerState);
+    const [formData, setFormData] = useState(loginForm)
+    const [isSignup, setIsSignup] = useState(false);
+    const [checked, setChecked] = useState({checkedA:false})
+    const dispatch = useDispatch();
+    
+   
+  
+  
+    const [showPassword, setShowPassword] = useState(false);
+    const handleShowPassword = () => setShowPassword(!showPassword);
+  
+    const switchMode = () => {
+      setForm(initialState);
+      setOwner(ownerState)
+      setIsSignup((prevIsSignup) => !prevIsSignup);
+      setShowPassword(false);
+    };
+      const classes = useStyles();
+      const history = useHistory();
+      const handleChange = (e) =>{
+        setForm({ ...form, [e.target.name]: e.target.value });
+        setOwner({ ...owner, [e.target.name]: e.target.value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      }
+
+      const onsubmit = (e) =>{
+        if(!isSignup){
+          e.preventDefault();
+          return dispatch(loginPage(formData, history))
+        }
+
+        if(checked.checkedA === false){
+       
+          console.log(form)
+          return dispatch(registerClient(form, history))
+          
+        }else{
+          console.log(owner)
+          return dispatch(registerOwner(owner, history))
+          
+        }
+       
+
+        
+      }
+     
+
     return (
         <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <form className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                
+          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+            <Container component="main" maxWidth="xs">
+            <div className={classes.paper} >
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in'}</Typography>
+              <form className={classes.form} onSubmit={onsubmit}>
+                <Grid container spacing={2}>
+                  { isSignup && (
+                  <>
+                    <Input name="first_name" label="First Name" handleChange={handleChange} autoFocus half />
+                    <Input name="last_name" label="Last Name" handleChange={handleChange} half />
+                    <Input name="cin" label="CIN" handleChange={handleChange} type="text" />
+                    <Input name="phone" label="Phone" handleChange={handleChange} type="text" />
+                  </>
+                  )}
+                  <Input name="email" label="Email Address" handleChange={handleChange} type="email" /> 
+                  {isSignup &&
+                  checked.checkedA === true &&
+                  <Input name="rib" label="Rib number" handleChange={handleChange} type="text" />
                   
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
+                  }
+                 
+                  
+                  <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+                  {/* { isSignup &&
+                   <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />
+                  } */}
                 </Grid>
-              </Grid>
-              <Box mt={5}>
-                <Copyright />
-              </Box>
-            </form>
-          </div>
+                <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+                  { isSignup ? 'Sign Up' : 'Sign In' }
+                </Button>
+                
+                <Grid container >   
+                  <Grid item >
+                    <Link onClick={switchMode} variant="inherit" to="">
+                      { isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
+                    </Link>
+                  </Grid>
+                  {isSignup && 
+                  <Grid component="label" container alignItems="center" spacing={1}>
+                    <Grid item>Client</Grid>
+                    <Grid item>
+                      <AntSwitch checked={checked.ckeckedA} onChange={(e)=>setChecked({...checked, [e.target.name]: e.target.checked})} name="checkedA" />
+                    </Grid>
+                    <Grid item>Owner</Grid>
+                  </Grid>
+                  }
+                </Grid>
+              </form>
+              </div>
+            </Container>
+          </Grid>
         </Grid>
-      </Grid>
     )
 }
 

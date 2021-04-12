@@ -2,11 +2,12 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Grid, CardContent, Typography, CardActions, Button, Card, Paper} from '@material-ui/core';
 import {useStyles} from '../home/styles';
-import {fetchCars} from '../../actions/OwnerAction';
+import {getCar} from '../../actions/CarAction';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
+import Navbar from '../dashboard/Navbar';
 
 const ViewCar = (props) => {
   const [expanded, setExpanded] = React.useState(false);
@@ -16,18 +17,19 @@ const ViewCar = (props) => {
   };
     const classes = useStyles();
     const currentId = props.match.params.id;
-    const car = useSelector((state) => currentId ? state.cars.find((car)=>car._id === currentId) : null);
-    console.log(currentId)
-    console.log(car)
+    const car = useSelector((state) => state.cars);
+    // console.log(currentId)
+    // console.log(car)
 
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(fetchCars())
-      },[dispatch])
+        dispatch(getCar(currentId))
+      },[currentId,dispatch])
 
 
     return (
-           
+           <>
+           <Navbar />
            <Paper className={classes.cardGrid} elevation={0}>
            {(car) ? (
        
@@ -54,17 +56,17 @@ const ViewCar = (props) => {
       </CardActions>
                   <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph><h3>Details:</h3></Typography>
-          <Typography paragraph>
+          <Typography paragraph>Details:</Typography>
+          <Typography paragraph align='left'>
             <b>Mark:</b> {car.mark}
           </Typography>
-          <Typography paragraph>
+          <Typography paragraph align='left'>
             <b>Color:</b> {car.color}
           </Typography>
-          <Typography paragraph>
+          <Typography paragraph align='left'>
             <b>Price:</b> {car.price}
           </Typography>
-          <Typography>
+          <Typography align='left'>
             <b>Fuel:</b> {car.fuel}
           </Typography>
         </CardContent>
@@ -87,7 +89,7 @@ const ViewCar = (props) => {
             ): <p>Véhicule not found!</p>}
             
          </Paper> 
-     
+          </>
     )
 }
 

@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import {fetchCars} from '../../actions/OwnerAction';
+import {fetchCars} from '../../actions/CarAction';
 import {Container, Grid, CardContent, Typography, CardActions, Button, Card} from '@material-ui/core';
+import Navbar from '../dashboard/Navbar';
 
 
 import {useStyles} from './styles'
@@ -17,7 +18,8 @@ const Cards = () => {
       },[dispatch])
 
     return (
-      
+        <>
+        <Navbar />
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
             {car.map((data) => (
@@ -43,7 +45,7 @@ const Cards = () => {
             ))}
           </Grid>
         </Container>
-        
+        </>
     )
 }
 
