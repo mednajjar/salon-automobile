@@ -12,7 +12,7 @@ exports.login = async (req, res)=>{
 
     try {
         // check email user
-        const Email = await Owner.findOne({email}) || await Client.findOne({email});
+        const Email =  await Owner.findOne({email}) ||  await Client.findOne({email});
         if(!Email)  return res.status(400).json({err: 'Invalid email or password'});
         console.log(Email.role)
         // compare password user
@@ -20,10 +20,10 @@ exports.login = async (req, res)=>{
         if(!match) return res.status(400).json({err: 'Invalid email or password'});
         const token = jwt.sign({id: Email._id, role: Email.role}, process.env.TOKEN_SECRET, {expiresIn:process.env.EXPIRATION_IN});
         console.log(token)
-        return res.status(200).cookie('auth_token', token, {maxAge:process.env.EXPIRATION_IN, httpOnly: true}).json(token);
+        return res.status(200).cookie('auth_token', token, {maxAge:process.env.EXPIRATION_IN, httpOnly: true}).json({token});
 
     } catch (err) {
-        res.status(500).json({error: 'bad request'});
+        res.status(400).json({error: 'bad request'});
     }
 }
 

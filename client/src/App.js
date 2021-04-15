@@ -1,5 +1,6 @@
 import './App.css';
 import Login from './components/login/Login';
+import Register from './components/login/Register';
 import Car from './components/owner/Car';
 import Home from './components/home/Cards';
 import View from './components/viewCar/ViewCar';
@@ -11,6 +12,7 @@ function App() {
       <Router>
           <Route exact path="/" component={Login} />
           <Switch>
+          <Route path="/register" component={Register} />
           <Route path="/dashboard" component={Navbar} />
           <Route path="/home" component={Home} />
           <Route path="/add" component={Car} />

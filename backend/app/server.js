@@ -9,20 +9,21 @@ const authentication = require('./routes/auth');
 const cookieParser = require('cookie-parser');
 const Fawn = require("fawn");
 const path = require('path');
-const cors = require('cors');
 const port = process.env.PORT | process.env.MY_PORT
+const cors = require('cors');
 
-
-
+app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(express.urlencoded({extended: false}));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+
+
 
 
 mongoose.set('useCreateIndex', true);
 // mongoose.set('debug', true);
 mongoose.set('useFindAndModify', false);
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+
 Fawn.init(mongoose);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

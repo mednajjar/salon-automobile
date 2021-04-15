@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import decode from 'jwt-decode';
-import * as actionTypes from '../../actions/actionTypes'
+import {logoutPage} from '../../actions/auth';
 
 const Navbar = () => {
 
@@ -10,9 +10,7 @@ const Navbar = () => {
     const history = useHistory();
 
     const logout = () => {
-
-        dispatch({ type: actionTypes.LOGOUT });
-        history.push('/');
+        dispatch(logoutPage(history));
       };
     
 
