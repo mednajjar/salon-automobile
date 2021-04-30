@@ -1,26 +1,21 @@
 import './App.css';
-import Login from './components/login/Login';
-import Register from './components/login/Register';
-import Car from './components/owner/Car';
-import Home from './components/home/Cards';
-import View from './components/viewCar/ViewCar';
+import Routes from './components/Routes';
 import Navbar from './components/dashboard/Navbar';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import { ifLoged } from './redux/slices/authSlice'
+
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(ifLoged())
+  }, [dispatch])
   return (
-    <div className="App">
-      <Router>
-          <Route exact path="/" component={Login} />
-          <Switch>
-          <Route path="/register" component={Register} />
-          <Route path="/dashboard" component={Navbar} />
-          <Route path="/home" component={Home} />
-          <Route path="/add" component={Car} />
-          <Route path='/:id' component={View} />
-        
-          </Switch>
-      </Router>
-    </div>
+    <Router>
+      <Navbar />
+       <Routes />
+    </Router>
   );
 }
 

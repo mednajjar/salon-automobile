@@ -1,11 +1,11 @@
 const express = require('express');
 const route = express.Router();
-const {registerOwner, createCar, fetchPlace} = require('../controllers/ownerController');
+const {registerOwner, createCar, fetchCars} = require('../controllers/ownerController');
 const multer = require('../middlewares/multer');
-const {authClient, auth} = require('../middlewares/validToken');
+const {Owner, auth} = require('../middlewares/validToken');
 
 route.post('/registerowner', registerOwner);
-route.get('/places', fetchPlace);
-route.post('/addcar', multer, createCar);
+route.get('/cars/fetch', Owner, auth, fetchCars)
+route.post('/addcar',Owner, auth,multer, createCar);
 
 module.exports = route;

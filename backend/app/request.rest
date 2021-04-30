@@ -20,7 +20,7 @@ Content-Type: application/json
     "first_name": "test",
     "last_name": "gol",
     "cin": "ha134567",
-    "email": "najjedd@gmail.com",
+    "email": "nvedd@gmail.com",
     "phone": "0601181312",
     "password": "azerty"
    
@@ -54,7 +54,7 @@ Content-Type: application/json
 GET http://localhost:4600/api/logout/logout
 ###
 GET http://localhost:4600/api/cars
-auth_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzMyNzNhNGE5ZjExNjY3YzJlZWMzMyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE2MTgxNzUyODMsImV4cCI6MTYxODE3NTg4M30.ZpRr7uALwaW8RI2OAIWXJbynxKwsHwysQZfotO5eWE8
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNzMyNzNhNGE5ZjExNjY3YzJlZWMzMyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE2MTk0Mzc5NTQsImV4cCI6MTYxOTQzODU1NH0.ynDQWjdoxgvIOnW8Q7krBI8OyP1JitLI4lz6vwFA2R4
 ###
 GET http://localhost:4600/api/606f16f32756ed2cd8429f04
 ###

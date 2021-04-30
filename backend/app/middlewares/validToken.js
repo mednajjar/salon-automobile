@@ -2,44 +2,52 @@ const jwt = require('jsonwebtoken');
 const Owner = require('../models/Owner');
 const Client = require('../models/Client');
 
-exports.authOwner = (req, res, next) => {
-    res.type = "owner";
+exports.Owner = (req, res, next) => {
+    res.role = "owner";
+    res.Model = Owner
+    console.log("Owner")
     next();
 }
-exports.authClient = (req, res, next) => {
-    res.type = "client";
+exports.Client = (req, res, next) => {
+    res.role = "client";
+    res.Model = Client;
     next();
 }
 
 exports.auth = async (req, res, next) => {
     const token = req.cookies['auth_token'];
-    console.log(token)
-    try{
-      const verify = await jwt.verify(token, process.env.TOKEN_SECRET);
-      const userLog = verify; 
-      console.log(userLog)
-    if(verify && userLog.role == res.type){
-        if(res.type === 'owner'){
-            let auth = await Owner.findById(userLog.id).select('-password');
-            res.locals.auth = auth;
-            console.log(res.locals.auth._id);
-            next();
-        }else{
-            auth = await Client.findById(userLog.id).select('-password');
-            res.locals.auth = auth;
-            console.log(res.locals.auth);
-            console.log(res.locals.auth._id);
-            next();
+    if (token) {
+        console.log('passer par isAuth middleware')
+        jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+            if (decodedToken && res.role === decodedToken.role) {
+                res.auth = await res.Model.findOne({ _id: decodedToken.id }).select('-password')
+                next()
+            } else {
+                res.clearCookie('auth_token').json({ role: '', isAuthenticated: false })
+            }
+        });
 
-        }
+    } else {
+        return res.json({ role: '', isAuthenticated: false });
     }
-    else{
-        res.status(400).json(`1 private root need ${res.type} to login`);
-    }
-      
-    } catch(err) {
-        res.locals.user = null;
-        res.cookie('auth_token', '', { maxAge: 1 });
-        res.status(400).json(`2 private root need ${res.type} to login`);
+};
+
+exports.isAuth = (req, res) => {
+    const token = req.cookies['auth_token'];
+    if (token) {
+        // console.log(token)
+        jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => {
+            if (err) {
+                return res.clearCookie('auth_token').json({ role: '', isAuthenticated: false });
+            } else {
+                return res
+                    .status(200)
+                    .json({ role: decodedToken.role, isAuthenticated: true });
+            }
+        });
+
+    } else {
+        console.log('passer par isAuth middleware')
+        return res.json({ role: '', isAuthenticated: false });
     }
 };
