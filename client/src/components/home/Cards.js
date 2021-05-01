@@ -40,11 +40,10 @@ const Cards = () => {
                     <b>Price:</b> {data.price} DH
                     </Typography>
                 </CardContent>
-                <CardActions className={classes.btn}>
-                  
+                <CardActions className={classes.btn}>                 
                   <Link to={`/${data._id}`}>
-                    <Button>
-                      View
+                    <Button variant="contained" size="small" color="primary">
+                    View
                     </Button>
                   </Link>
                 </CardActions>

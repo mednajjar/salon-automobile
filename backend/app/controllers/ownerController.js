@@ -5,13 +5,13 @@ const { registerOwner, addCar } = require('../validation/validationForms');
 const Car = require('../models/Car');
 const Fawn = require("fawn");
 const Place = require('../models/Place');
-
+const fs = require('fs');
 
 
 exports.registerOwner = async (req, res) => {
     // check validaton
-    // const { error } = registerOwner(req.body);
-    // if (error) return res.status(400).json({ err: error.details[0].message, ...req.body });
+    const { error } = registerOwner(req.body);
+    if (error) return res.status(400).json({ err: error.details[0].message, ...req.body });
     const { email, password } = req.body;
     const hashPassword = await bcrypt.hash(password, 12);
     const ifEmailExist = await Owner.findOne({ email }) || await Client.findOne({ email });
@@ -21,13 +21,6 @@ exports.registerOwner = async (req, res) => {
     })
     owner.password = hashPassword;
     try {
-        // const task =  Fawn.Task();
-        // const copy = await task.save('Owner', owner)
-        // .save('Auth',
-        // {_id: owner._id, user_email: owner.email, user_pass: owner.password, user_role: owner.role }
-        // )
-        // .run({ useMongoose: true })
-        // if (task) return res.status(201).json({ copy })
         const saved = await owner.save();
         if (saved) return res.status(201).json('Owner created');
     } catch (error) {
@@ -38,7 +31,7 @@ exports.registerOwner = async (req, res) => {
 exports.createCar = async (req, res) => {
     const { error } = addCar(req.body);
     if (error) return res.status(400).json({ err: error.details[0].message, ...req.body });
-    delete req.body.image;
+
     const car = new Car({
         ...req.body,
         image: req.file.path,
@@ -52,14 +45,41 @@ exports.createCar = async (req, res) => {
                 { id_owner: res.auth._id, id_car: car._id, id_place: places._id }
             )
             .update('place',
-                {_id: places._id}, {is_free: false})
+                { _id: places._id }, { is_free: false })
             .run({ useMongoose: true })
         if (task) return res.status(201).json({ taches })
-        // const saveCar = await car.save();
-        // if(saveCar) return res.status(201).json({message: 'car created', car});
     } catch (err) {
         res.status(400).json({ err: 'bad reaquest' });
     }
+}
+
+exports.updateCar = async (req, res) => {
+    try {
+        const data = req.file ? {
+            ...req.body,
+            image: req.file.path
+        } : { ...req.body }
+        const car = await Car.updateOne({ _id: req.params.id }, { ...data });
+        if (car) res.status(200).json(car)
+    } catch (error) {
+        throw Error(error)
+    }
+
+}
+exports.deleteCar = async (req, res) => {
+    try {
+        const car = await Car.findOne({ _id: req.params.id });
+        const filename = car.image.split('uploads\\')[1];
+        console.log(filename)
+        fs.unlink(`uploads/${filename}`, async ()=>{
+            const deleted = await Car.deleteOne({ _id: car._id })
+            if (deleted) return res.status(200).json('car deleted')
+        })
+        
+    } catch (error) {
+        throw Error(error)
+    }
+
 }
 
 exports.fetchPlace = async (req, res) => {
@@ -73,7 +93,7 @@ exports.fetchPlace = async (req, res) => {
 
 exports.fetchCars = async (req, res) => {
     try {
-        const getData = await Car.find({ is_saled: false });
+        const getData = await Car.find();
         if (getData) return res.status(201).json(getData)
 
     } catch (error) {
