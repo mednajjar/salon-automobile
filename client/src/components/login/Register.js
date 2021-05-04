@@ -92,7 +92,7 @@ const Register = () => {
               </Button>
               <Grid container >
                 <Grid item >
-                  <Link variant="inherit" to="/">
+                  <Link variant="inherit" to="/login">
                     Already have an account? Sign in
                     </Link>
                 </Grid>

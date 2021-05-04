@@ -24,16 +24,20 @@ mongoose.set('useFindAndModify', false);
 
 Fawn.init(mongoose);
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(`/uploads`, express.static(path.join(__dirname, 'uploads')));
 
 mongoose.connect(process.env.DB_CON, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Database connected :)'))
     .catch(() => console.log('Faild to connect with database :('))
 
-app.use('/api', homeRoute);
-app.use('/api', ownerRoute);
-app.use('/api', clientRoute);
-app.use('/api', authentication);
-app.use('*', isAuth);
+    
+    app.use('/api', homeRoute);
+    app.use('/api', ownerRoute);
+    app.use('/api', clientRoute);
+    app.use('/api', authentication);
+    // app.use('*', isAuth);
+    app.use('*', isAuth, (req, res, next) => {
+        next();
+    });
 
 app.listen(port, () => console.log(`http://localhost:${port}`))

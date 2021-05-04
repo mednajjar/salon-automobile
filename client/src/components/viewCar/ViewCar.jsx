@@ -21,6 +21,7 @@ const ViewCar = (props) => {
   const [car, setCar] = useState('')
 
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const viewCar = async () => {
     try {
       const { data } = await axios.get(`http://localhost:4600/api/${id}`);
@@ -30,11 +31,11 @@ const ViewCar = (props) => {
     }
   }
 
-  console.log(id)
+  console.log(car)
 
   useEffect(() => {
     viewCar()
-  }, [])
+  }, [viewCar])
 
 
   return (
@@ -46,7 +47,7 @@ const ViewCar = (props) => {
           <Grid container className={classes.cardGrid2}>
             <Grid item xs={12} sm={6} md={4}>
               <Card key={car._id} className={classes.card}>
-                <img className={classes.img} src={car.image} alt={car.name} />
+                <img className={classes.img} src={__dirname + car.image} alt={car.name} />
 
                 {/* *********** */}
                 <CardActions disableSpacing>

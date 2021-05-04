@@ -4,18 +4,17 @@ const carSlice = createSlice({
   name: 'carSlice',
   initialState: {
     car: [],
-    carError: ''
   },
   reducers: {
-    getCar: () => {},
+    getCar: () => { },
     setCar: (state = this.initialState, action) => ({
       ...state,
-      car: action.payload,
-      carError: ''
+      car: action.payload
     }),
+    getOneCar: () => {},
     
   },
 });
 
-export const { carError, getCar, setCar } = carSlice.actions;
+export const { getCar, setCar, getOneCar } = carSlice.actions;
 export default carSlice.reducer;

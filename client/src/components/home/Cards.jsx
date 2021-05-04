@@ -28,7 +28,7 @@ const Cards = () => {
 
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {car && car.map((data) => (
+          {car.length >0 && car.map((data) => (
             <Grid item key={data._id} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 <img className={classes.img} src={data.image} alt={data.name} />
@@ -41,7 +41,7 @@ const Cards = () => {
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.btn}>                 
-                  <Link to={`/${data._id}`}>
+                  <Link to={`/home/${data._id}`}>
                     <Button variant="contained" size="small" color="primary">
                     View
                     </Button>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Avatar, Button, CssBaseline, Paper, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
-import { useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import Input from './input/Input';
 import { Link } from 'react-router-dom';
@@ -17,7 +16,6 @@ const Login = () => {
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   const classes = useStyles();
-  const history = useHistory();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
@@ -25,7 +23,6 @@ const Login = () => {
   const onsubmit = async (e) => {
     e.preventDefault();
     dispatch(getLogin(formData))
-    history.push('/dashboard');
   }
 
   return (

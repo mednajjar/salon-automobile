@@ -3,24 +3,24 @@ import { createSlice } from '@reduxjs/toolkit';
 const authSlice = createSlice({
   name: 'authslice',
   initialState: {
-    role: '',
+    role: null,
     isAuthenticated: false,
     loginError: '',
-    registerError:'',
+    registerError: '',
   },
   reducers: {
-    ifLoged: () => {},
-    getLogin: () => {},
-    getRegister: ()=>{},
+    ifLoged: () => { },
+    getLogin: () => { },
+    getRegister: () => { },
     setLogin: (state = this.initialState, action) => ({
       ...state,
       role: action.payload.role,
       isAuthenticated: action.payload.isAuthenticated,
       loginError: '',
       registerError: '',
-     
+
     }),
-    getLogout: () => {},
+    getLogout: () => { },
     loginError: (state = this.initialState, action) => ({
       ...state,
       loginError: action.payload,
@@ -29,9 +29,9 @@ const authSlice = createSlice({
       ...state,
       registerError: action.payload,
     }),
-    
+
   },
 });
 
-export const { setLogin,getRegister, getLogin, ifLoged, loginError, getLogout,registerError } = authSlice.actions;
+export const { setLogin, getRegister, getLogin, ifLoged, loginError, getLogout, registerError } = authSlice.actions;
 export default authSlice.reducer;

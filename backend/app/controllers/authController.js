@@ -26,5 +26,5 @@ exports.login = async (req, res) => {
 }
 
 exports.logout = (req, res) => {
-    res.clearCookie('auth_token').json('loged out')
+    res.clearCookie('auth_token').json({ role: '', isAuthenticated: false });
 }

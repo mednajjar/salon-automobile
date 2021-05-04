@@ -1,8 +1,8 @@
 import { takeLatest } from 'redux-saga/effects';
-import { getLogin, ifLoged, getLogout, getRegister} from '../slices/authSlice';
-import { getCar} from '../slices/carSlice';
-import { handelGetCar } from './handlers/car.handler';
-import { handelGetLogin, handelIfLoged, handelGetLogout ,handelGetRegister } from './handlers/auth.handler';
+import { getLogin, ifLoged, getLogout, getRegister } from '../slices/authSlice';
+import { getCar, getOneCar } from '../slices/carSlice';
+import { handelGetCar, handelOneCar } from './handlers/car.handler';
+import { handelGetLogin, handelIfLoged, handelGetLogout, handelGetRegister } from './handlers/auth.handler';
 
 
 export function* watcherSaga() {
@@ -11,4 +11,6 @@ export function* watcherSaga() {
   yield takeLatest(getLogout.type, handelGetLogout);
   yield takeLatest(getRegister.type, handelGetRegister);
   yield takeLatest(getCar.type, handelGetCar);
+  yield takeLatest(getOneCar.type, handelOneCar);
+
 }

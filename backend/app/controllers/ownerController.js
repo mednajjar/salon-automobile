@@ -101,3 +101,15 @@ exports.fetchCars = async (req, res) => {
     }
 
 }
+
+exports.getCar = async (req, res) => {
+    try {
+        const oneCar = await Car.findOne({_id: req.params.id});
+        if (oneCar) return res.status(201).json(oneCar)
+
+    } catch (error) {
+        return res.status(404).json('Not Found!');
+
+    }
+
+}
