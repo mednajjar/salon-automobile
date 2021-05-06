@@ -9,9 +9,9 @@ const authSlice = createSlice({
     registerError: '',
   },
   reducers: {
-    ifLoged: () => { },
-    getLogin: () => { },
-    getRegister: () => { },
+    ifLoged: () => {},
+    getLogin: () => {},
+    getRegister: () => {},
     setLogin: (state = this.initialState, action) => ({
       ...state,
       role: action.payload.role,

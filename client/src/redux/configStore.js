@@ -1,8 +1,7 @@
-import
-{
-  configureStore,
-  combineReducers,
-  getDefaultMiddleware,
+import {
+configureStore,
+combineReducers,
+getDefaultMiddleware,
 } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from './sagas/rootSaga';

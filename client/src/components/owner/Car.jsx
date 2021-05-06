@@ -15,13 +15,17 @@ const Car = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('registration_number', carData.registration_number);
-    formData.append('name', carData.name);
-    formData.append('image', carData.image);
-    formData.append('mark', carData.mark);
-    formData.append('color', carData.color);
-    formData.append('price', carData.price);
-    formData.append('fuel', carData.fuel);
+    // formData.append('registration_number', carData.registration_number);
+    // formData.append('name', carData.name);
+    // formData.append('image', carData.image);
+    // formData.append('mark', carData.mark);
+    // formData.append('color', carData.color);
+    // formData.append('price', carData.price);
+    // formData.append('fuel', carData.fuel);
+    for (const [key, value] of Object.entries(carData))
+      {
+        formData.append(key, value);
+      }
     await axios.post('http://localhost:4600/api/addcar', formData);
     return history.push('/cars')
   };

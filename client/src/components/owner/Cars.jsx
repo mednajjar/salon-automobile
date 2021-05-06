@@ -28,7 +28,7 @@ const Cars = () => {
         <Container className={classes.cardGrid} maxWidth="md">
           <h3 className="text-center">All cars</h3>
         <Grid container spacing={4}>
-          {(car.length > 0)  && car.map((data) => (
+          {(car.length > 0) && car.map((data) => (
             <Grid item key={data._id} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 <img className={classes.img} src={data.image} alt={data.name} />
@@ -38,7 +38,7 @@ const Cars = () => {
                   </Typography>
                   <Typography>
                     <b>Price:</b> {data.price} DH
-                    <b>Saled:</b> {(data.is_saled).toLocaleString()} 
+                    <b>Saled:</b> {data.is_saled} 
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.btn}>                 

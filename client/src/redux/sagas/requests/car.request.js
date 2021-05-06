@@ -15,3 +15,23 @@ export function requestOneCar(action) {
     url: `${URL}/car/${action.payload}`,
   });
 }
+
+export function requestDeleteCar(action) {
+  return axios.request({
+    method: 'delete',
+    url: `${URL}/deleteCar/${action.payload}`,
+  });
+}
+
+export function requestEditCar(action) {
+ const {id,formData}= action.payload
+ return  axios.put( `${URL}/updateCar/${id}`, formData)
+  // return axios.request({
+  //   method: 'put',
+  //   url: `${URL}/updateCar/${action.payload.id}`,
+  //   data: {
+  //     ...action.payload.formData
+  //   },
+  //   headers: {'Content-Type': 'multipart/form-data' }
+  // });
+}

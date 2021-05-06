@@ -5,6 +5,7 @@ const Client = require('../models/Client');
 exports.Owner = (req, res, next) => {
     res.role = "owner";
     res.Model = Owner
+    console.log("Owner")
     next();
 }
 exports.Client = (req, res, next) => {
