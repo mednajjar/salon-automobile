@@ -1,5 +1,6 @@
 # salon-automobile
-Contexte du projet  La société ‘Tomorrow Cars’ vous demande de leur créer une application web pour leur prochain salon des automobiles. Pour répondre au besoin, il faut créer une application web utilisant Node.Js / Express Js / Mongo DB en backend et ReactJs en frontend,  En bref, le salon d’automobile va se passer comme suit :  
+- Contexte du projet:
+La société ‘Tomorrow Cars’ vous demande de leur créer une application web pour leur prochain salon des automobiles. Pour répondre au besoin, il faut créer une application web utilisant Node.Js / Express Js / Mongo DB en backend et ReactJs en frontend,  En bref, le salon d’automobile va se passer comme suit :  
 • L’arrivée des propriétaires des voitures.  
 • Enregistrement des propriétaires via l’application  
 • Positionner les véhicules dans les coins réservés.  
