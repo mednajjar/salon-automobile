@@ -59,7 +59,7 @@ const Navbar = () => {
                                             <button className="btn btn-warning">
 
                                                 Logout
-                                    </button>
+                                            </button>
                                         </Link>
                                     </li>
                                 </ul>
